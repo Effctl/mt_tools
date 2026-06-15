@@ -47,10 +47,11 @@ class ExcelProcessorSettingsMixin:
     @classmethod
     def get_excel_processor_settings(cls) -> list[SettingsData]:
         """Return all available TOML settings files for the given functions class.
+        """Return all available TOML settings files for this functions class.
 
-        Settings files are expected in a ``settings/`` subfolder next to the
-        module that defines *functions_class*. Unless otherwise defined in function
-        class's settings_path attribute.
+        Settings files are expected in the folder returned by ``cls.get_settings_path()``
+        (by default: a ``settings/`` subfolder next to the module that defines the class).
+        Override ``get_settings_path`` to customize the location.
         """
         if not cls.has_settings:
             return []
